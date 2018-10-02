@@ -1,0 +1,56 @@
+public class Arc {
+	String name;
+	Node destination;
+	Node source;
+	Double time;
+	String niveauPisteOuModeTransport;
+	
+	public Arc(String name, String niveauPisteOuModeTransport,Node source, Node destination, Double time) {
+		super();
+		this.name = name;
+		this.destination = destination;
+		this.source = source;
+		this.time = time;
+		this.niveauPisteOuModeTransport = niveauPisteOuModeTransport;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Node getDestination() {
+		return destination;
+	}
+
+	public void setDestination(Node destination) {
+		this.destination = destination;
+	}
+
+	public Double getTime() {
+		return time;
+	}
+
+	public void setTime(Double time) {
+		this.time = time;
+	}
+	
+	public Node getSource() {
+		return source;
+	}
+
+	public void setSource(Node source) {
+		this.source = source;
+	}
+
+	public String getNiveauPisteOuModeTransport() {
+		return niveauPisteOuModeTransport;
+	}
+
+	public void setNiveauPisteOuModeTransport(String niveauPisteOuModeTransport) {
+		this.niveauPisteOuModeTransport = niveauPisteOuModeTransport;
+	}
+}
