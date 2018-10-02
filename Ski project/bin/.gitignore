@@ -1,10 +1,1 @@
-/Graph.class
-/Node.class
-/TestReadCSV.class
-/data.csv
-/main.class
-/nodes.csv
-/Dijkstra.class
-/writeInCSVFile.class
-/Arc.class
-/adjacentMatrix.csv
+/Main.class
