@@ -1,0 +1,60 @@
+import java.awt.List;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Main {
+
+	public static void main(String[] args) throws FileNotFoundException {
+		// Store the workspace path
+		String workspacePath = System.getProperty("user.dir");
+		// Store nodes from the CSV "nodes.csv" to an ArrayList (ReadCSVFile function
+		// return an arraylist
+		// in which, each item is a line of the csv).
+		ArrayList<String[]> CSVnodes = TestReadCSV.ReadCSVFile(workspacePath + "\\src\\nodes.csv");
+
+		// Declare an HashMap to store the nodes read in the csv file
+		ArrayList<Node> nodes = new ArrayList<Node>();
+
+		// Create Nodes and store them in the HashTable
+		// The key is the ID of the node (correspond to the first column of the CSV
+		// The value is the newest Node which his constructor is Node(Id, Name,
+		// Altitude).
+		// Name correspond to the second column of the CSV
+		// Altitude correspond to the third column of the CSV
+		// We need to parse the ID and Altitude to Integer because the CSV return String
+		for (int i = 0; i < CSVnodes.size(); i++) {
+			nodes.add(new Node(Integer.valueOf(CSVnodes.get(i)[0]), CSVnodes.get(i)[1], Integer.valueOf(CSVnodes.get(i)[2])));
+		}
+
+		// Store relations between each nodes from the CSV "data.csv" to an ArrayList
+		ArrayList<String[]> CSVarc = TestReadCSV.ReadCSVFile(workspacePath + "\\src\\data.csv");
+		for(int i=0;i<CSVarc.size();i++)
+			System.out.println(CSVarc.get(i)[0]);
+		System.out.println(CSVarc.size());
+		ArrayList<Arc> arcs = new ArrayList<Arc>();
+		// For each nodes in the HashMap datas, we associate to them the nodes which it
+		// is in relation with.
+		// Each node has a Map of his "adjacent" node.
+		// We associate them by calling the Node.addDestination function which takes in
+		// argument :
+		// The associated node (Third column of the csv)
+		// The time in minutes to go to the source node to the associated node.
+		// The travel time, depend on the type (V,B,R,N, etc..) -- TO DO --
+		for (int i = 0; i < CSVarc.size(); i++) {
+			arcs.add(new Arc(CSVarc.get(i)[0], CSVarc.get(i)[1],nodes.get(Integer.valueOf(CSVarc.get(i)[2])),nodes.get(Integer.valueOf(CSVarc.get(i)[3])), 1.0));//Integer.valueOf(destination.get(i)[6])));
+		}
+
+		Graph graph = new Graph(nodes, arcs);
+
+		/*for (int i = 0; i < nodes.size(); i++) {
+			graph.getNodes().get(i).getName();
+			writeInCSVFile.write(nodes.get(i), workspacePath+"\\src\\adjacentMatrix.csv");
+		}*/
+
+		//for(Arc arc : datas.get(2).adjacentNodes)
+			//System.out.println(arc.getDestination().getName());
+		//graph = Dijkstra.calculateShortestPathFromSource(graph, datas.get(1));
+
+	}
+}
