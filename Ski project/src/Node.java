@@ -1,7 +1,6 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class Node {
 	private String name;
@@ -10,19 +9,27 @@ public class Node {
 
 	private List<Node> shortestPath = new LinkedList<>();
      
-    private Integer distance = Integer.MAX_VALUE;
+    private float distance = Float.MAX_VALUE;
      
-    Map<Node, Integer> adjacentNodes = new HashMap<>();
+    ArrayList<Arc> adjacentNodes = new ArrayList<Arc>();
  
-    public void addDestination(Node destination, int distance) {
-        adjacentNodes.put(destination, distance);
-    }
-  
     public Node(Integer id,String name, Integer altitude) {
         this.name = name;
         this.setId(id);
         this.setAltitude(altitude);
     }
+    
+    public void addDestination(Arc arc) {
+        adjacentNodes.add(arc);
+    }
+    
+    public ArrayList<Arc> getAdjacentNodes() {
+		return adjacentNodes;
+	}
+
+	public void setAdjacentNodes(ArrayList<Arc> adjacentNodes) {
+		this.adjacentNodes = adjacentNodes;
+	}
 
     public String getName() {
 		return name;
@@ -40,11 +47,11 @@ public class Node {
 		this.shortestPath = shortestPath;
 	}
 
-	public Integer getDistance() {
+	public float getDistance() {
 		return distance;
 	}
 
-	public void setDistance(Integer distance) {
+	public void setDistance(float distance) {
 		this.distance = distance;
 	}
 
@@ -62,13 +69,5 @@ public class Node {
 
 	public void setAltitude(Integer altitude) {
 		this.altitude = altitude;
-	}
-	
-	public Map<Node, Integer> getAdjacentNodes() {
-		return adjacentNodes;
-	}
-
-	public void setAdjacentNodes(Map<Node, Integer> adjacentNodes) {
-		this.adjacentNodes = adjacentNodes;
 	}
 }
