@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="d:\Profiles\rahenin\OneDrive - De Vinci\ProjetSki\Dijkstra-Algorithm-Java-GUI-master"/>
+		<item value="d:\Profiles\rahenin\OneDrive - De Vinci\ProjetSki\WBANSimulator-master"/>
 		<item value="d:\Profiles\rahenin\OneDrive - De Vinci\ProjetSki\GitRepo\Ski project"/>
 	</list>
 	<section name="ExternalProjectImportWizard">
