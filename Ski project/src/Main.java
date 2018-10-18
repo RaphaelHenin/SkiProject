@@ -12,7 +12,7 @@ public class Main {
 		
 		// Store nodes from the CSV "nodes.csv" to an ArrayList (ReadCSVFile function
 		// return an arraylist in which, each item is a line of the csv).
-		ArrayList<String[]> CSVnodes = TestReadCSV.ReadCSVFile(workspacePath + "\\src\\nodes.csv");
+		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\src\\vertices.csv");
 
 		// Declare an ArrayList to store the nodes read in the csv file
 		ArrayList<Node> nodes = new ArrayList<Node>();
@@ -29,7 +29,7 @@ public class Main {
 		}
 
 		// Store relations between each nodes from the CSV "data.csv" to an ArrayList
-		ArrayList<String[]> CSVarc = TestReadCSV.ReadCSVFile(workspacePath + "\\src\\data.csv");
+		ArrayList<String[]> CSVarc = ReadCSV.ReadCSVFile(workspacePath + "\\src\\relation_vertices.csv");
 		
 		// Declare an ArrayList to store the edges read in the csv file
 		ArrayList<Arc> arcs = new ArrayList<Arc>();
@@ -40,7 +40,6 @@ public class Main {
 					nodes.get(Integer.valueOf(CSVarc.get(i)[2]) - 1)));
 		}
 		
-		//writeInCSVFile.write(arcs, workspacePath+"\\src\\adjacentMatrix.csv");
 		//Create the graph
 		Graph graph = new Graph(nodes, arcs);
 		
@@ -53,7 +52,7 @@ public class Main {
 		dijkstra.execute(nodes.get(3));
 		
 		//Store the path from source to the destination node (Id node - 1)
-		LinkedList<Node> path = dijkstra.getPath(nodes.get(26));
+		LinkedList<Node> path = dijkstra.getPath(nodes.get(10));
 		
 		//Store the edges covered by Dijkstra
 		ArrayList<Arc> arcCoveredByPath = dijkstra.getArcsCovered();
@@ -67,7 +66,7 @@ public class Main {
 			double time = 0.0;
 			DecimalFormat df = new DecimalFormat(".00");
 			for(Arc arc : arcCoveredByPath) {
-				System.out.println(arc.name + " "+ arc.niveauPisteOuModeTransport + " "+df.format(arc.getTime()));
+				System.out.println(arc.getName() + " "+ arc.getNiveauPisteOuModeTransport() + " "+df.format(arc.getTime()));
 				time+=arc.getTime();
 			}
 			System.out.println("Total time = "+df.format(time)+ " minutes");

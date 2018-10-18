@@ -103,8 +103,8 @@ public class Dijkstra {
         List<Node> neighbors = new ArrayList<Node>();
         for (Arc edge : edges) {
             if (edge.getSource().equals(node)
-                    && !isSettled(edge.getDestination()) && !edge.niveauPisteOuModeTransport.equals("N") && !edge.niveauPisteOuModeTransport.equals("R")
-                    && !edge.niveauPisteOuModeTransport.equals("SURF")) {
+                    && !isSettled(edge.getDestination()) && !edge.getNiveauPisteOuModeTransport().equals("N") && !edge.getNiveauPisteOuModeTransport().equals("R")
+                    && !edge.getNiveauPisteOuModeTransport().equals("SURF")) {
                 neighbors.add(edge.getDestination());
             }
         }
@@ -115,7 +115,7 @@ public class Dijkstra {
         List<Node> neighbors = new ArrayList<Node>();
         for (Arc edge : edges) {
             if (edge.getSource().equals(node)
-                    && !isSettled(edge.getDestination()) && !edge.niveauPisteOuModeTransport.equals("N")) {
+                    && !isSettled(edge.getDestination()) && !edge.getNiveauPisteOuModeTransport().equals("N")) {
                 neighbors.add(edge.getDestination());
             }
         }
@@ -179,7 +179,7 @@ public class Dijkstra {
     private Arc getArcCoveredByNormalFor(Node node, Node target) {
         for (Arc edge : edges) {
             if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target) && !edge.niveauPisteOuModeTransport.equals("N")) {
+                    && edge.getDestination().equals(target) && !edge.getNiveauPisteOuModeTransport().equals("N")) {
                 return edge;
             }
         }
@@ -189,8 +189,8 @@ public class Dijkstra {
     private Arc getArcCoveredByBeginnerFor(Node node, Node target) {
         for (Arc edge : edges) {
             if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target) && !edge.niveauPisteOuModeTransport.equals("N") && !edge.niveauPisteOuModeTransport.equals("R")
-                    && !edge.niveauPisteOuModeTransport.equals("SURF")) {
+                    && edge.getDestination().equals(target) && !edge.getNiveauPisteOuModeTransport().equals("N") && !edge.getNiveauPisteOuModeTransport().equals("R")
+                    && !edge.getNiveauPisteOuModeTransport().equals("SURF")) {
                 return edge;
             }
         }

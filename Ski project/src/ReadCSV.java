@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class TestReadCSV {
+public class ReadCSV {
 
 	public static ArrayList<String[]> ReadCSVFile(String path) {
 		// TODO Auto-generated method stub

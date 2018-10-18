@@ -1,9 +1,9 @@
 public class Arc {
-	String name;
-	Node destination;
-	Node source;
-	Double time;
-	String niveauPisteOuModeTransport;
+	private String name;
+	private Node destination;
+	private Node source;
+	private Double time;
+	private String niveauPisteOuModeTransport;
 
 	public Arc(String name, String niveauPisteOuModeTransport, Node source, Node destination) {
 		super();
