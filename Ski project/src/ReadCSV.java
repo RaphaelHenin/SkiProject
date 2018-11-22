@@ -21,10 +21,8 @@ public class ReadCSV {
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {		
 			e.printStackTrace();
 		}
 		return linesCSV; //Return the arrayList

@@ -133,7 +133,7 @@ public class Dijkstra {
                 return edge.getTime();
             }
         }
-        throw new RuntimeException("Should not happen");
+        throw new RuntimeException("Take too long time");
     }
     
     /*
@@ -173,7 +173,7 @@ public class Dijkstra {
                 return edge;
             }
         }
-        throw new RuntimeException("Should not happen");
+        throw new RuntimeException("Take too long time");
     }
     
     private Arc getArcCoveredByNormalFor(Node node, Node target) {
@@ -183,7 +183,7 @@ public class Dijkstra {
                 return edge;
             }
         }
-        throw new RuntimeException("Should not happen");
+        throw new RuntimeException("Take too long time");
     }
     
     private Arc getArcCoveredByBeginnerFor(Node node, Node target) {
@@ -194,7 +194,7 @@ public class Dijkstra {
                 return edge;
             }
         }
-        throw new RuntimeException("Should not happen");
+        throw new RuntimeException("Take too long time");
     }
 
     public ArrayList<Arc> getArcsCovered() {

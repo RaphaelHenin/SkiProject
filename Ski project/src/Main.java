@@ -44,7 +44,7 @@ public class Main {
 		Graph graph = new Graph(nodes, arcs);
 		
 		//User IDs with his level
-		User user = new User("Raph", "Henin", "Débutant");
+		User user = new User("Raph", "Henin", "Expert");
 		
 		Dijkstra dijkstra = new Dijkstra(graph, user);
 		
