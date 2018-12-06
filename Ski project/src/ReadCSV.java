@@ -7,19 +7,18 @@ import java.util.ArrayList;
 public class ReadCSV {
 
 	public static ArrayList<String[]> ReadCSVFile(String path) {
-		// TODO Auto-generated method stub
-		BufferedReader br;	
+		BufferedReader bufferReader;	
 		ArrayList<String[]> linesCSV = new ArrayList<String[]>();
 		try {
-			br = new BufferedReader(new FileReader(path));
-			br.readLine(); //Skip header
+			bufferReader = new BufferedReader(new FileReader(path));
+			bufferReader.readLine(); //Skip header
 			String ligne = null;
-			while ((ligne = br.readLine()) != null) {
-				// Retourner la ligne dans le tableau
+			while ((ligne = bufferReader.readLine()) != null) {
+				//Return the line in the table
 				String[] data = ligne.split(";");
 				linesCSV.add(data);//add my line to an ArrayList
 			}
-			br.close();
+			bufferReader.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {		

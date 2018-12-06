@@ -29,19 +29,39 @@ public class Main {
 		}
 
 		// Store relations between each nodes from the CSV "data.csv" to an ArrayList
-		ArrayList<String[]> CSVarc = ReadCSV.ReadCSVFile(workspacePath + "\\src\\relation_vertices.csv");
+		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\src\\relation_vertices.csv");
 		
 		// Declare an ArrayList to store the edges read in the csv file
-		ArrayList<Arc> arcs = new ArrayList<Arc>();
+		ArrayList<Edge> edges = new ArrayList<Edge>();
 		
 		//Populating the arcs ArrayList with the values of the CSV file (CSVarc ArrayList).
-		for (int i = 0; i < CSVarc.size(); i++) {
-			arcs.add(new Arc(CSVarc.get(i)[0], CSVarc.get(i)[1], nodes.get(Integer.valueOf(CSVarc.get(i)[3]) - 1),
-					nodes.get(Integer.valueOf(CSVarc.get(i)[2]) - 1)));
+		for (int i = 0; i < csv_edge.size(); i++) {
+			String name = csv_edge.get(i)[0];
+			String typeTransport = csv_edge.get(i)[1];
+			Node sourceNode = nodes.get(Integer.valueOf(csv_edge.get(i)[3]) - 1);
+			Node destinationNode = nodes.get(Integer.valueOf(csv_edge.get(i)[2]) - 1);
+			MobilityType mobility_type;
+			//If it's a Ski Lift
+			if(typeTransport.startsWith("T")) {
+				mobility_type = new SkiLift(i, csv_edge.get(i)[0], csv_edge.get(i)[1]);
+				edges.add(new Edge(name, mobility_type, sourceNode, destinationNode));
+			}					
+			else {
+				//If it's a BUS
+				if(typeTransport.equals("BUS")) {
+					mobility_type = new Bus(i, csv_edge.get(i)[0], csv_edge.get(i)[1]);
+					edges.add(new Edge(name, mobility_type, sourceNode, destinationNode));
+				}		
+				//Else a Ski Slope
+				else {
+					mobility_type = new SkiSlope(i, csv_edge.get(i)[0], csv_edge.get(i)[1]);
+					edges.add(new Edge(name, mobility_type, sourceNode, destinationNode));
+				}
+			}	
 		}
 		
 		//Create the graph
-		Graph graph = new Graph(nodes, arcs);
+		Graph graph = new Graph(nodes, edges);
 		
 		//User IDs with his level
 		User user = new User("Raph", "Henin", "Expert");
@@ -55,7 +75,7 @@ public class Main {
 		LinkedList<Node> path = dijkstra.getPath(nodes.get(10));
 		
 		//Store the edges covered by Dijkstra
-		ArrayList<Arc> arcCoveredByPath = dijkstra.getArcsCovered();
+		ArrayList<Edge> arcCoveredByPath = dijkstra.getArcsCovered();
 		
 		if (path == null) {
 			System.out.println("Path does not exist");
@@ -65,8 +85,8 @@ public class Main {
 			}
 			double time = 0.0;
 			DecimalFormat df = new DecimalFormat(".00");
-			for(Arc arc : arcCoveredByPath) {
-				System.out.println(arc.getName() + " "+ arc.getNiveauPisteOuModeTransport() + " "+df.format(arc.getTime()));
+			for(Edge arc : arcCoveredByPath) {
+				System.out.println(arc.getName() + " "+ arc.getMobility_type().getType() + " "+df.format(arc.getTime()));
 				time+=arc.getTime();
 			}
 			System.out.println("Total time = "+df.format(time)+ " minutes");

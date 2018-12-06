@@ -10,18 +10,18 @@ import java.util.Set;
 public class Dijkstra {
 	@SuppressWarnings("unused")
 	private final List<Node> nodes;
-    private final List<Arc> edges;
+    private final List<Edge> edges;
     private Set<Node> settledNodes;
     private Set<Node> unSettledNodes;
     private Map<Node, Node> predecessors;
     private Map<Node, Double> distance;
-    private ArrayList<Arc> arcsCovered;
+    private ArrayList<Edge> edgesCovered;
     private User user;
 
     public Dijkstra(Graph graph, User user) {
         // create a copy of the array so that we can operate on this array
         this.nodes = new ArrayList<Node>(graph.getNodes());
-        this.edges = new ArrayList<Arc>(graph.getArcs());
+        this.edges = new ArrayList<Edge>(graph.getEdges());
         this.user = user;
     }
     
@@ -32,7 +32,7 @@ public class Dijkstra {
         unSettledNodes = new HashSet<Node>();
         distance = new HashMap<Node, Double>();
         predecessors = new HashMap<Node, Node>();
-        arcsCovered = new ArrayList<Arc>();
+        edgesCovered = new ArrayList<Edge>();
         distance.put(source, 0.);
         unSettledNodes.add(source);
         while (unSettledNodes.size() > 0) {
@@ -90,7 +90,7 @@ public class Dijkstra {
     
     private List<Node> getNeighborsForExpert(Node node) {
         List<Node> neighbors = new ArrayList<Node>();
-        for (Arc edge : edges) {
+        for (Edge edge : edges) {
             if (edge.getSource().equals(node)
                     && !isSettled(edge.getDestination())) {
                 neighbors.add(edge.getDestination());
@@ -101,10 +101,10 @@ public class Dijkstra {
     
     private List<Node> getNeighborsForBeginner(Node node) {
         List<Node> neighbors = new ArrayList<Node>();
-        for (Arc edge : edges) {
+        for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && !isSettled(edge.getDestination()) && !edge.getNiveauPisteOuModeTransport().equals("N") && !edge.getNiveauPisteOuModeTransport().equals("R")
-                    && !edge.getNiveauPisteOuModeTransport().equals("SURF")) {
+                    && !isSettled(edge.getDestination()) && !edge.getMobility_type().getType().equals("N") && !edge.getMobility_type().getType().equals("R")
+                    && !edge.getMobility_type().getType().equals("SURF")) {
                 neighbors.add(edge.getDestination());
             }
         }
@@ -113,9 +113,9 @@ public class Dijkstra {
     
     private List<Node> getNeighborsForNormal(Node node) {
         List<Node> neighbors = new ArrayList<Node>();
-        for (Arc edge : edges) {
+        for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && !isSettled(edge.getDestination()) && !edge.getNiveauPisteOuModeTransport().equals("N")) {
+                    && !isSettled(edge.getDestination()) && !edge.getMobility_type().getType().equals("N")) {
                 neighbors.add(edge.getDestination());
             }
         }
@@ -127,7 +127,7 @@ public class Dijkstra {
     }
     
     private Double getTime(Node node, Node target) {
-        for (Arc edge : edges) {
+        for (Edge edge : edges) {
             if (edge.getSource().equals(node)
                     && edge.getDestination().equals(target)) {
                 return edge.getTime();
@@ -152,22 +152,22 @@ public class Dijkstra {
         path.add(step);
         while (predecessors.get(step) != null) {
         	if(user.getLevel().equals("Expert"))
-        		arcsCovered.add(getArcCoveredByExpertFor(predecessors.get(step), step));
+        		edgesCovered.add(getArcCoveredByExpertFor(predecessors.get(step), step));
         	if(user.getLevel().equals("Normal"))
-        		arcsCovered.add(getArcCoveredByNormalFor(predecessors.get(step), step));
+        		edgesCovered.add(getArcCoveredByNormalFor(predecessors.get(step), step));
         	if(user.getLevel().equals("Débutant"))
-        		arcsCovered.add(getArcCoveredByBeginnerFor(predecessors.get(step), step));
+        		edgesCovered.add(getArcCoveredByBeginnerFor(predecessors.get(step), step));
             step = predecessors.get(step);
             path.add(step);           
         }
         // Put it into the correct order
-        Collections.reverse(arcsCovered);
+        Collections.reverse(edgesCovered);
         Collections.reverse(path);
         return path;
     }
 
-    private Arc getArcCoveredByExpertFor(Node node, Node target) {
-        for (Arc edge : edges) {
+    private Edge getArcCoveredByExpertFor(Node node, Node target) {
+        for (Edge edge : edges) {
             if (edge.getSource().equals(node)
                     && edge.getDestination().equals(target) /*&& !edge.niveauPisteOuModeTransport.equals("N")*/) {
                 return edge;
@@ -176,33 +176,33 @@ public class Dijkstra {
         throw new RuntimeException("Take too long time");
     }
     
-    private Arc getArcCoveredByNormalFor(Node node, Node target) {
-        for (Arc edge : edges) {
+    private Edge getArcCoveredByNormalFor(Node node, Node target) {
+        for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target) && !edge.getNiveauPisteOuModeTransport().equals("N")) {
+                    && edge.getDestination().equals(target) && !edge.getMobility_type().getType().equals("N")) {
                 return edge;
             }
         }
         throw new RuntimeException("Take too long time");
     }
     
-    private Arc getArcCoveredByBeginnerFor(Node node, Node target) {
-        for (Arc edge : edges) {
+    private Edge getArcCoveredByBeginnerFor(Node node, Node target) {
+        for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target) && !edge.getNiveauPisteOuModeTransport().equals("N") && !edge.getNiveauPisteOuModeTransport().equals("R")
-                    && !edge.getNiveauPisteOuModeTransport().equals("SURF")) {
+                    && edge.getDestination().equals(target) && !edge.getMobility_type().getType().equals("N") && !edge.getMobility_type().getType().equals("R")
+                    && !edge.getMobility_type().getType().equals("SURF")) {
                 return edge;
             }
         }
         throw new RuntimeException("Take too long time");
     }
 
-    public ArrayList<Arc> getArcsCovered() {
-		return arcsCovered;
+    public ArrayList<Edge> getArcsCovered() {
+		return edgesCovered;
 	}
 
-	public void setArcsCovered(ArrayList<Arc> arcsCovered) {
-		this.arcsCovered = arcsCovered;
+	public void setArcsCovered(ArrayList<Edge> arcsCovered) {
+		this.edgesCovered = arcsCovered;
 	}
 
     

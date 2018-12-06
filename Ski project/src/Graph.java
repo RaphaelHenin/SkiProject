@@ -2,11 +2,11 @@ import java.util.List;
 
 public class Graph {
 	private List<Node> nodes;
-	private List<Arc> arcs;
+	private List<Edge> edges;
 	
-	public Graph(List<Node> nodes, List<Arc> arcs) {
+	public Graph(List<Node> nodes, List<Edge> edges) {
         this.nodes = nodes;
-        this.arcs = arcs;
+        this.edges = edges;
     }
 	
 	public List<Node> getNodes() {
@@ -16,12 +16,12 @@ public class Graph {
 		this.nodes = nodes;
 	}
 
-	public List<Arc> getArcs() {
-		return arcs;
+	public List<Edge> getEdges() {
+		return edges;
 	}
 
-	public void setArcs(List<Arc> arcs) {
-		this.arcs = arcs;
+	public void setEdges(List<Edge> edges) {
+		this.edges = edges;
 	}
 	
 }
