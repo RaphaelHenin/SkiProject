@@ -103,8 +103,8 @@ public class Dijkstra {
         List<Node> neighbors = new ArrayList<Node>();
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && !isSettled(edge.getDestination()) && !edge.getMobility_type().getType().equals("N") && !edge.getMobility_type().getType().equals("R")
-                    && !edge.getMobility_type().getType().equals("SURF")) {
+                    && !isSettled(edge.getDestination()) && !edge.getTransportType().equals("N") && !edge.getTransportType().equals("R")
+                    && !edge.getTransportType().equals("SURF")) {
                 neighbors.add(edge.getDestination());
             }
         }
@@ -115,7 +115,7 @@ public class Dijkstra {
         List<Node> neighbors = new ArrayList<Node>();
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && !isSettled(edge.getDestination()) && !edge.getMobility_type().getType().equals("N")) {
+                    && !isSettled(edge.getDestination()) && !edge.getTransportType().equals("N")) {
                 neighbors.add(edge.getDestination());
             }
         }
@@ -179,7 +179,7 @@ public class Dijkstra {
     private Edge getArcCoveredByNormalFor(Node node, Node target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target) && !edge.getMobility_type().getType().equals("N")) {
+                    && edge.getDestination().equals(target) && !edge.getTransportType().equals("N")) {
                 return edge;
             }
         }
@@ -189,8 +189,8 @@ public class Dijkstra {
     private Edge getArcCoveredByBeginnerFor(Node node, Node target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target) && !edge.getMobility_type().getType().equals("N") && !edge.getMobility_type().getType().equals("R")
-                    && !edge.getMobility_type().getType().equals("SURF")) {
+                    && edge.getDestination().equals(target) && !edge.getTransportType().equals("N") && !edge.getTransportType().equals("R")
+                    && !edge.getTransportType().equals("SURF")) {
                 return edge;
             }
         }

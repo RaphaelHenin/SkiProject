@@ -40,23 +40,16 @@ public class Main {
 			String typeTransport = csv_edge.get(i)[1];
 			Node sourceNode = nodes.get(Integer.valueOf(csv_edge.get(i)[3]) - 1);
 			Node destinationNode = nodes.get(Integer.valueOf(csv_edge.get(i)[2]) - 1);
-			MobilityType mobility_type;
 			//If it's a Ski Lift
-			if(typeTransport.startsWith("T")) {
-				mobility_type = new SkiLift(i, csv_edge.get(i)[0], csv_edge.get(i)[1]);
-				edges.add(new Edge(name, mobility_type, sourceNode, destinationNode));
-			}					
+			if(typeTransport.startsWith("T"))
+				edges.add(new SkiLift(name, sourceNode, destinationNode, typeTransport));
 			else {
 				//If it's a BUS
-				if(typeTransport.equals("BUS")) {
-					mobility_type = new Bus(i, csv_edge.get(i)[0], csv_edge.get(i)[1]);
-					edges.add(new Edge(name, mobility_type, sourceNode, destinationNode));
-				}		
+				if(typeTransport.equals("BUS")) 
+					edges.add(new Bus(name, sourceNode, destinationNode));					
 				//Else a Ski Slope
-				else {
-					mobility_type = new SkiSlope(i, csv_edge.get(i)[0], csv_edge.get(i)[1]);
-					edges.add(new Edge(name, mobility_type, sourceNode, destinationNode));
-				}
+				else 
+					edges.add(new SkiSlope(name, sourceNode, destinationNode, typeTransport));				
 			}	
 		}
 		
@@ -86,7 +79,7 @@ public class Main {
 			double time = 0.0;
 			DecimalFormat df = new DecimalFormat(".00");
 			for(Edge arc : arcCoveredByPath) {
-				System.out.println(arc.getName() + " "+ arc.getMobility_type().getType() + " "+df.format(arc.getTime()));
+				System.out.println(arc.getName() + " "+ arc.getTransportType() + " "+df.format(arc.getTime()));
 				time+=arc.getTime();
 			}
 			System.out.println("Total time = "+df.format(time)+ " minutes");

@@ -17,4 +17,6 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="writeInCSVFile"/>
 <fullyQualifiedTypeName name="java.text.DecimalFormat"/>
+<fullyQualifiedTypeName name="MobilityType"/>
+<fullyQualifiedTypeName name="Bus"/>
 </qualifiedTypeNameHistroy>
