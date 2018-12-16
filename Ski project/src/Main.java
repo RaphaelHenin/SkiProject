@@ -11,14 +11,16 @@ public class Main {
 
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		SwingUtilities.invokeLater(new Runnable() {
-									   @Override
-									   public void run() {
 
-										   Interface anInterface = new Interface();
-										   anInterface.setVisible(true);
+		@Override
+		public void run() {
 
-									   }
-								   });
+			Interface anInterface = new Interface();
+			anInterface.setVisible(true);
+
+		   }
+		}
+	);
 
 
 		// Store the workspace path
