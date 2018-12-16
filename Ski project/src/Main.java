@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -5,11 +6,24 @@ import java.util.LinkedList;
 
 public class Main {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		
+	public static void main(String[] args) throws FileNotFoundException, ClassNotFoundException, UnsupportedLookAndFeelException, IllegalAccessException, InstantiationException
+	{
+
+		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		SwingUtilities.invokeLater(new Runnable() {
+									   @Override
+									   public void run() {
+
+										   Interface anInterface = new Interface();
+										   anInterface.setVisible(true);
+
+									   }
+								   });
+
+
 		// Store the workspace path
 		String workspacePath = System.getProperty("user.dir");
-		
+
 		// Store nodes from the CSV "nodes.csv" to an ArrayList (ReadCSVFile function
 		// return an arraylist in which, each item is a line of the csv).
 		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\src\\vertices.csv");
@@ -30,10 +44,10 @@ public class Main {
 
 		// Store relations between each nodes from the CSV "data.csv" to an ArrayList
 		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\src\\relation_vertices.csv");
-		
+
 		// Declare an ArrayList to store the edges read in the csv file
 		ArrayList<Edge> edges = new ArrayList<Edge>();
-		
+
 		//Populating the arcs ArrayList with the values of the CSV file (CSVarc ArrayList).
 		for (int i = 0; i < csv_edge.size(); i++) {
 			String name = csv_edge.get(i)[0];
@@ -45,31 +59,31 @@ public class Main {
 				edges.add(new SkiLift(name, sourceNode, destinationNode, typeTransport));
 			else {
 				//If it's a BUS
-				if(typeTransport.equals("BUS")) 
-					edges.add(new Bus(name, sourceNode, destinationNode));					
-				//Else a Ski Slope
-				else 
-					edges.add(new SkiSlope(name, sourceNode, destinationNode, typeTransport));				
-			}	
+				if(typeTransport.equals("BUS"))
+					edges.add(new Bus(name, sourceNode, destinationNode));
+					//Else a Ski Slope
+				else
+					edges.add(new SkiSlope(name, sourceNode, destinationNode, typeTransport));
+			}
 		}
-		
+
 		//Create the graph
 		Graph graph = new Graph(nodes, edges);
-		
+
 		//User IDs with his level
 		User user = new User("Raph", "Henin", "Expert");
-		
+
 		Dijkstra dijkstra = new Dijkstra(graph, user);
-		
+
 		//Define the source node (Id node - 1)
 		dijkstra.execute(nodes.get(3));
-		
+
 		//Store the path from source to the destination node (Id node - 1)
 		LinkedList<Node> path = dijkstra.getPath(nodes.get(10));
-		
+
 		//Store the edges covered by Dijkstra
 		ArrayList<Edge> arcCoveredByPath = dijkstra.getArcsCovered();
-		
+
 		if (path == null) {
 			System.out.println("Path does not exist");
 		} else {
@@ -86,4 +100,5 @@ public class Main {
 		}
 
 	}
+
 }
