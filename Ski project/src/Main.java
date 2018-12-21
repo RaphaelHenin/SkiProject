@@ -10,18 +10,20 @@ public class Main {
 	{
 
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
 		SwingUtilities.invokeLater(new Runnable() {
 
 		@Override
 		public void run() {
 
 			Interface anInterface = new Interface();
+			anInterface.getAccessibleContext();
 			anInterface.setVisible(true);
+//			anInterface.user_name
 
 		   }
 		}
 	);
-
 
 		// Store the workspace path
 		String workspacePath = System.getProperty("user.dir");
@@ -72,9 +74,9 @@ public class Main {
 		//Create the graph
 		Graph graph = new Graph(nodes, edges);
 
-		//User IDs with his level
+//		//User IDs with his level
 		User user = new User("Raph", "Henin", "Expert");
-
+//		User user = new User(anInterface.textArea1, user_firstname, user_level);
 		Dijkstra dijkstra = new Dijkstra(graph, user);
 
 		//Define the source node (Id node - 1)
