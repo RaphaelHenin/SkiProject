@@ -72,9 +72,9 @@ public class Dijkstra {
     	List<Node> adjacentNodes = new ArrayList<Node>();
     	if(user.getLevel().equals("Expert"))
     		adjacentNodes = getNeighborsForExpert(node);
-    	if(user.getLevel().equals("Débutant"))
+    	if(user.getLevel().equals("Beginner"))
     		adjacentNodes = getNeighborsForBeginner(node);
-    	if(user.getLevel().equals("Normal"))
+    	if(user.getLevel().equals("Intermediate"))
     		adjacentNodes = getNeighborsForNormal(node);
         for (Node target : adjacentNodes) {
             if (getShortestDistance(target) > getShortestDistance(node)
@@ -153,9 +153,9 @@ public class Dijkstra {
         while (predecessors.get(step) != null) {
         	if(user.getLevel().equals("Expert"))
         		edgesCovered.add(getArcCoveredByExpertFor(predecessors.get(step), step));
-        	if(user.getLevel().equals("Normal"))
+        	if(user.getLevel().equals("Intermediate"))
         		edgesCovered.add(getArcCoveredByNormalFor(predecessors.get(step), step));
-        	if(user.getLevel().equals("Débutant"))
+        	if(user.getLevel().equals("Beginner"))
         		edgesCovered.add(getArcCoveredByBeginnerFor(predecessors.get(step), step));
             step = predecessors.get(step);
             path.add(step);           
@@ -169,7 +169,7 @@ public class Dijkstra {
     private Edge getArcCoveredByExpertFor(Node node, Node target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target) /*&& !edge.niveauPisteOuModeTransport.equals("N")*/) {
+                    && edge.getDestination().equals(target)) {
                 return edge;
             }
         }
@@ -179,7 +179,7 @@ public class Dijkstra {
     private Edge getArcCoveredByNormalFor(Node node, Node target) {
         for (Edge edge : edges) {
             if (edge.getSource().equals(node)
-                    && edge.getDestination().equals(target) && !edge.getTransportType().equals("N")) {
+                    && edge.getDestination().equals(target) && !edge.getTransportType().equals("N") && !edge.getTransportType().equals("SURF")) {
                 return edge;
             }
         }
