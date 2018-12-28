@@ -1,4 +1,7 @@
 # SkiProject - RHN & PTS
+Requirement :
+Install the jar : https://mvnrepository.com/artifact/com.jgoodies/jgoodies-common/1.8.0
+
 Help skiers reach a destination by using the different ski slopes and modes of transport available in a ski station.
 
 In anticipation of the upcoming winter, Mr. Snow, director of a major ski resort, is looking to optimize
