@@ -126,7 +126,7 @@ public class SkiSpottingGUI {
 		// Store nodes from the CSV "nodes.csv" to an ArrayList (ReadCSVFile
 		// function
 		// return an arraylist in which, each item is a line of the csv).
-		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\src\\vertices.csv");
+		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\vertices.csv");
 
 		// Declare an ArrayList to store the nodes read in the csv file
 		nodes = new ArrayList<Node>();
@@ -151,7 +151,7 @@ public class SkiSpottingGUI {
 
 		// Store relations between each nodes from the CSV "relation_vertices.csv" to an
 		// ArrayList
-		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\src\\relation_vertices.csv");
+		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\relation_vertices.csv");
 
 		// Declare an ArrayList to store the edges read in the csv file
 		edges = new ArrayList<Edge>();
