@@ -61,13 +61,13 @@ public class SkiSpottingGUI {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 825, 398);
+		frame.setBounds(100, 100, 950, 461);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
 				ColumnSpec.decode("25px"),
 				ColumnSpec.decode("350px"),
 				ColumnSpec.decode("25px"),
-				ColumnSpec.decode("400px"),},
+				ColumnSpec.decode("500px"),},
 			new RowSpec[] {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
@@ -92,7 +92,7 @@ public class SkiSpottingGUI {
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
+				RowSpec.decode("50dlu"),
 				FormSpecs.RELATED_GAP_ROWSPEC,
 				FormSpecs.DEFAULT_ROWSPEC,
 				FormSpecs.RELATED_GAP_ROWSPEC,
@@ -114,7 +114,7 @@ public class SkiSpottingGUI {
 		textResult.setEditable(false);
 		JScrollPane scroll = new JScrollPane(textResult);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		frame.getContentPane().add(scroll, "4, 4, 1, 25, fill, fill");
+		frame.getContentPane().add(scroll, "4, 4, 1, 21, fill, fill");
 		
 		JLabel lblLastname = new JLabel("Lastname");
 		frame.getContentPane().add(lblLastname, "2, 6");
@@ -177,8 +177,8 @@ public class SkiSpottingGUI {
 		btnGo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				textResult.setText("Hello "+textName.getText()+" "+ textLastName.getText()+"\n"
-						+ "Here is the proposed itinerary to go from the summit "+From_list.getSelectedItem().toString()
+				textResult.setText(" Hello "+textName.getText()+" "+ textLastName.getText()+"\n"
+						+ " Here is the proposed itinerary to go from the summit "+From_list.getSelectedItem().toString()
 						+" to the summit "+To_list.getSelectedItem().toString()+" : \n");
 				//Create the graph
 				graph = new Graph(nodes, edges);
@@ -198,28 +198,24 @@ public class SkiSpottingGUI {
 				ArrayList<Edge> arcCoveredByPath = dijkstra.getArcsCovered();
 				
 				if (path == null) {
-					System.out.println("Path does not exist");
 					textResult.setText("Path does not exist \n");
 				} else {
-					textResult.setText(textResult.getText()+"List of summits through which you will pass : \n");
+					textResult.setText(textResult.getText()+" List of summits through which you will pass : \n");
 					for (Node node : path) {
-						System.out.println(node.getId());
-						textResult.setText(textResult.getText()+node.getId().toString()+"\n");
+						textResult.setText(textResult.getText()+" > "+node.getId().toString()+"\n");
 					}
 					double time = 0.0;
 					DecimalFormat df = new DecimalFormat(".00");
-					textResult.setText(textResult.getText()+"List of ski slopes you need to use (name, type or difficulty, approx. time) : \n");
+					textResult.setText(textResult.getText()+"\n List of ski slopes you need to use (name, type or difficulty, approx. time) : \n");
 					for(Edge arc : arcCoveredByPath) {
-						System.out.println(arc.getName() + " "+ arc.getTransportType() + " "+df.format(arc.getTime()));
 						time+=arc.getTime();
-						textResult.setText(textResult.getText()+arc.getName() + " "+ arc.getTransportType() + " "+df.format(arc.getTime())+"\n");
+						textResult.setText(textResult.getText()+" > "+arc.getName() + " "+ arc.getTransportType() + " "+df.format(arc.getTime())+"\n");
 					}
-					System.out.println("Total time = "+df.format(time)+ " minutes");
-					textResult.setText(textResult.getText()+"Total time = "+df.format(time)+ " minutes \n");
+					textResult.setText(textResult.getText()+"\n Total time = "+df.format(time)+ " minutes \n");
 				}
 			}
 		});
-		frame.getContentPane().add(btnGo, "2, 26, 1, 3, fill, fill");
+		frame.getContentPane().add(btnGo, "2, 24, fill, fill");
 		// Store relations between each nodes from the CSV "data.csv" to an ArrayList
 		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\src\\relation_vertices.csv");
 		
