@@ -88,7 +88,7 @@ So technically, in the dijkstra algorithm we need to get the level (so the his a
 
 #### GUI
 This how the GUI actually looks like :
-![](Image/Capture_GUI.png?raw=true)
+![](Image/Capture_GUI.PNG?raw=true)
 
 ## UML Diagram
 ![](Image/UML_SkiSpotting.png?raw=true)
