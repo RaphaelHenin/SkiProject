@@ -224,21 +224,21 @@ public class SkiSpottingGUI {
 						}
 						Double time = 0.0;
 						textResult.setText(textResult.getText()
-								+ "\n List of ski slopes you need to use (name, type or difficulty, approx. time) : \n");
+								+ "\n List of ski slopes you need to use (name, type or difficulty, approx. time [HH:MM:SS]) : \n");
 						// Display the edges (Name, Ski Slope difficulty|Ski
 						// Lift type|BUS, time to travel)
 						for (Edge arc : arcCoveredByPath) {
-							String[] travelTime = new String[4];
 							time += arc.getTime();
-							travelTime = ConvertDoubleToTime.convertDoubleToTime(arc.getTime(), travelTime, 0);
-							textResult.setText(textResult.getText() + " > " + arc.getName() + " "
-									+ arc.getTransportType() + " " + ConvertDoubleToTime.displayTime(travelTime) + "\n");
+							if(arc.getTransportType() == "BUS" || arc.getName().length() >= 13)
+							textResult.setText(textResult.getText() + " > " + arc.getName() + " \t"
+									+ arc.getTransportType() + "\t [" + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(arc.getTime(), new ArrayList<String>())) + "] \n");
+							else
+								textResult.setText(textResult.getText() + " > " + arc.getName() + "\t\t"
+										+ arc.getTransportType() + "\t [" + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(arc.getTime(), new ArrayList<String>())) + "] \n");
 						}
 						// Display the total time needed to go to source node to
 						// destination node
-						String[] totalTravelTime = new String[4];
-						totalTravelTime = ConvertDoubleToTime.convertDoubleToTime(time, totalTravelTime, 0);
-						textResult.setText(textResult.getText() + "\n Total time = " + ConvertDoubleToTime.displayTime(totalTravelTime) + " minutes \n");
+						textResult.setText(textResult.getText() + "\n Total time = " + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(time, new ArrayList<String>())) + " minutes \n");
 					}
 				}
 			}
