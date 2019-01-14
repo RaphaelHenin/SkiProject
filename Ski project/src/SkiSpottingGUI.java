@@ -1,7 +1,6 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -223,21 +222,23 @@ public class SkiSpottingGUI {
 						for (Node node : path) {
 							textResult.setText(textResult.getText() + " > " + node.getId().toString() + "\n");
 						}
-						double time = 0.0;
-						DecimalFormat df = new DecimalFormat(".00");
+						Double time = 0.0;
 						textResult.setText(textResult.getText()
 								+ "\n List of ski slopes you need to use (name, type or difficulty, approx. time) : \n");
 						// Display the edges (Name, Ski Slope difficulty|Ski
 						// Lift type|BUS, time to travel)
 						for (Edge arc : arcCoveredByPath) {
+							String[] travelTime = new String[4];
 							time += arc.getTime();
-
+							travelTime = ConvertDoubleToTime.convertDoubleToTime(arc.getTime(), travelTime, 0);
 							textResult.setText(textResult.getText() + " > " + arc.getName() + " "
-									+ arc.getTransportType() + " " + df.format(arc.getTime()) + "\n");
+									+ arc.getTransportType() + " " + ConvertDoubleToTime.displayTime(travelTime) + "\n");
 						}
 						// Display the total time needed to go to source node to
 						// destination node
-						textResult.setText(textResult.getText() + "\n Total time = " + df.format(time) + " minutes \n");
+						String[] totalTravelTime = new String[4];
+						totalTravelTime = ConvertDoubleToTime.convertDoubleToTime(time, totalTravelTime, 0);
+						textResult.setText(textResult.getText() + "\n Total time = " + ConvertDoubleToTime.displayTime(totalTravelTime) + " minutes \n");
 					}
 				}
 			}
