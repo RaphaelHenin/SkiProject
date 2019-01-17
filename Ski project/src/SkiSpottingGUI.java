@@ -238,7 +238,7 @@ public class SkiSpottingGUI {
 						}
 						// Display the total time needed to go to source node to
 						// destination node
-						textResult.setText(textResult.getText() + "\n Total time = " + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(time, new ArrayList<String>())) + " minutes \n");
+						textResult.setText(textResult.getText() + "\n Total time = " + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(time, new ArrayList<String>())) + "\n");
 					}
 				}
 			}
