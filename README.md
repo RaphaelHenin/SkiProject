@@ -8,6 +8,23 @@
 ## Requirement :
 Add the jgoodies-common-1.8.0.jar in the classpath. (Run Configurations -> Classpath tab -> Add external Jar)
 
+## To Know :
+Summary
+So when to use DFS over A*, when to use Dijkstra over A* to find the shortest paths ?
+We can summarise this as below-
+
+1) One source and One Destination-
+→ Use A* Search Algorithm (For Unweighted as well as Weighted Graphs)
+
+2) One Source, All Destination –
+→ Use BFS (For Unweighted Graphs)
+→ Use Dijkstra (For Weighted Graphs without negative weights)
+→ Use Bellman Ford (For Weighted Graphs with negative weights)
+
+3) Between every pair of nodes-
+→ Floyd-Warshall
+→ Johnson’s Algorithm
+
 ## Subject
 In anticipation of the upcoming winter, Mr. Snow, director of a major ski resort, is looking to optimize
 the management of his company while making the ski area more attractive to tourists.
