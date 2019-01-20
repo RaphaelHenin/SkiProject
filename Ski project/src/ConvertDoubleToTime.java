@@ -100,10 +100,4 @@ public class ConvertDoubleToTime {
 		// milliseconds are not displayed
 		return timeToDisplay;
 	}
-
-	public static void main(String[] args){
-		// TODO Auto-generated method stub
-		System.out.println(displayTime(convertDoubleToTime(50.00, new ArrayList<String>())));
-	}
-
 }
