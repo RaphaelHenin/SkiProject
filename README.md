@@ -1,9 +1,11 @@
 # SkiProject - RHN & PTS
 
 ## To Improve :
-- Design of the GUI
-- Correct time format
+- Design of the GUI (Web in progress)
 - Implement flow management
+- Check if the edge has already been covered by the algorithm (Done for Dijkstra)
+- Edit printPath method of Node class like the getPath method of Dijkstra class
+- For A* algorithm, print the edges using in the path.
 
 ## Requirement :
 Add the jgoodies-common-1.8.0.jar in the classpath. (Run Configurations -> Classpath tab -> Add external Jar)
