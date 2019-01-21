@@ -32,9 +32,9 @@ public class ConvertDoubleToTime {
 			temp.add(hourUnit);
 			newValue = time - Double.parseDouble(hourUnit);
 		} else {
-			// If the number before the point is equal 0, it means that we have
+			// If the number before the point is equal 0 and it's the first time, it means that we have
 			// only second
-			if (firstUnit == 0) {
+			if (firstUnit == 0 && temp.size() == 0) {
 				temp.add(0, null);
 				temp.add(1, null);
 			} else {

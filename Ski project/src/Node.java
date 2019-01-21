@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class Node implements Comparable<Node>{
@@ -67,7 +68,7 @@ public class Node implements Comparable<Node>{
 	}
 	
 	public static void printPath(Node destination) {
-		System.out.println("Total distance traveled: " + destination.getDistance());
+		System.out.println("Total distance traveled: " + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(destination.getDistance(), new ArrayList<String>())));
 		Node current = destination;
 		Stack<Node> path = new Stack<Node>();
 		path.push(destination);

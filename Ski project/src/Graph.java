@@ -38,6 +38,7 @@ public class Graph {
 	public static Double getDistanceFrom(List<Edge> edges, Node start, Node end) {
 		for(Edge e : edges) {
 			if(e.getSource().equals(start) && e.getDestination().equals(end)) {
+				System.out.println(e.getName() + " " +e.getTime());
 				return e.getTime();
 			}
 		}

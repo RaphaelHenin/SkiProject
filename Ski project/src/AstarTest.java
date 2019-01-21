@@ -68,7 +68,7 @@ public class AstarTest {
 		
 		Astar a = new Astar(new Graph(nodes, edges));
         Node start = nodes.get(1);
-        Node end = nodes.get(10);
+        Node end = nodes.get(9);
         
         //Calculate shortest path to given node for all nodes.
         a.run(start, end);

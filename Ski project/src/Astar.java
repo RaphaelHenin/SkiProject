@@ -45,7 +45,7 @@ public class Astar {
 			updateNeighbor(current, end);
 		}
 		//We did not find the shortest path.
-		System.out.println("Shortest path between " + start + " and " + end + " was not found.");
+		System.out.println("Shortest path between " + start.getName() + " and " + end.getName() + " was not found.");
 	}
 	
 	/*
