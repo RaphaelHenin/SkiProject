@@ -71,71 +71,40 @@ public class SkiSpottingGUI {
 		frame = new JFrame();
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new FormLayout(new ColumnSpec[] {
-				ColumnSpec.decode("25px"),
-				ColumnSpec.decode("350px"),
-				ColumnSpec.decode("25px"),
-				ColumnSpec.decode("500px:grow"),},
-			new RowSpec[] {
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("50dlu"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("default:grow"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				FormSpecs.DEFAULT_ROWSPEC,
-				FormSpecs.RELATED_GAP_ROWSPEC,}));
-		
+		frame.getContentPane().setLayout(new FormLayout(
+				new ColumnSpec[] { ColumnSpec.decode("25px"), ColumnSpec.decode("350px"), ColumnSpec.decode("25px"),
+						ColumnSpec.decode("500px:grow"), },
+				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("50dlu"),
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("default:grow"), FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, }));
+
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, "4, 2, 1, 51, fill, fill");		
+		frame.getContentPane().add(panel, "4, 2, 1, 51, fill, fill");
 		panel.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblNewLabel = new JLabel(new ImageIcon(System.getProperty("user.dir") + "\\resources\\ski_station_map.PNG"));
+
+		JLabel lblNewLabel = new JLabel(
+				new ImageIcon(System.getProperty("user.dir") + "\\resources\\ski_station_map.PNG"));
+		lblNewLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println("x : "+ arg0.getX()+"\n y: "+arg0.getY());
+			}
+		});
 		panel.add(lblNewLabel);
 
 		JLabel lblName = new JLabel("Name");
@@ -144,8 +113,6 @@ public class SkiSpottingGUI {
 		textName = new JTextField();
 		frame.getContentPane().add(textName, "2, 4, left, default");
 		textName.setColumns(10);
-		
-		
 
 		JLabel lblLastname = new JLabel("Lastname");
 		frame.getContentPane().add(lblLastname, "2, 6");
@@ -235,15 +202,15 @@ public class SkiSpottingGUI {
 
 		JButton btnGo = new JButton("Go !");
 		frame.getContentPane().add(btnGo, "2, 24, fill, fill");
-		
-				JLabel lblResult = new JLabel("Result :");
-				frame.getContentPane().add(lblResult, "2, 26");
-				
-						JTextArea textResult = new JTextArea();
-						textResult.setEditable(false);
-						JScrollPane scroll = new JScrollPane(textResult);
-						scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-						frame.getContentPane().add(scroll, "2, 28, 1, 25, fill, fill");
+
+		JLabel lblResult = new JLabel("Result :");
+		frame.getContentPane().add(lblResult, "2, 26");
+
+		JTextArea textResult = new JTextArea();
+		textResult.setEditable(false);
+		JScrollPane scroll = new JScrollPane(textResult);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		frame.getContentPane().add(scroll, "2, 28, 1, 25, fill, fill");
 		// When the user click on the button
 		btnGo.addMouseListener(new MouseAdapter() {
 			@Override
@@ -292,20 +259,34 @@ public class SkiSpottingGUI {
 						// Lift type|BUS, time to travel)
 						for (Edge arc : arcCoveredByPath) {
 							time += arc.getTime();
-							if(arc.getTransportType() == "BUS" || arc.getName().length() >= 13)
-							textResult.setText(textResult.getText() + " > " + arc.getName() + " \t"
-									+ arc.getTransportType() + "\t [" + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(arc.getTime(), new ArrayList<String>())) + "] \n");
+							if (arc.getTransportType() == "BUS" || arc.getName().length() >= 13)
+								textResult
+										.setText(textResult.getText() + " > " + arc.getName() + " \t"
+												+ arc.getTransportType() + "\t ["
+												+ ConvertDoubleToTime.displayTime(ConvertDoubleToTime
+														.convertDoubleToTime(arc.getTime(), new ArrayList<String>()))
+												+ "] \n");
 							else
-								textResult.setText(textResult.getText() + " > " + arc.getName() + "\t\t"
-										+ arc.getTransportType() + "\t [" + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(arc.getTime(), new ArrayList<String>())) + "] \n");
+								textResult
+										.setText(textResult.getText() + " > " + arc.getName() + "\t\t"
+												+ arc.getTransportType() + "\t ["
+												+ ConvertDoubleToTime.displayTime(ConvertDoubleToTime
+														.convertDoubleToTime(arc.getTime(), new ArrayList<String>()))
+												+ "] \n");
 						}
 						// Display the total time needed to go to source node to
 						// destination node
-						textResult.setText(textResult.getText() + "\n Total time = " + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(time, new ArrayList<String>())) + "\n");
+						textResult
+								.setText(textResult.getText() + "\n Total time = "
+										+ ConvertDoubleToTime.displayTime(
+												ConvertDoubleToTime.convertDoubleToTime(time, new ArrayList<String>()))
+										+ "\n");
 					}
 				}
 			}
 		});
+		
+		
 
 	}
 }
