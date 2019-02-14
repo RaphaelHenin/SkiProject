@@ -1,5 +1,5 @@
 Id;Name;Altitude;x;y
-1;mont joie start;;129;642
+1;mont joie start;;116;563
 2;fin retour lay;;88;566
 3;fin retour gorge;;39;546
 4;fin gorge;1470;196;479
@@ -22,17 +22,29 @@ Id;Name;Altitude;x;y
 21;début roselette 2;;424;300
 22;début bretelle (intersection);;464;140
 23;début nantrouge;;477;271
-24;;;;
-25;;;;
-26;;;;
-27;;;;
-28;;;;
-29;;;;
-30;;;;
-31;;;;
-32;;;;
-33;;;;
-34;;;;
-35;;;;
-36;;;;
+24;début pierre blanche;;546;213
+25;fin pierres blanche;;591;106
+26;fin chamois;;594;193
+27;fin col;;602;172
+28;début col;2000;691;115
+29;intersection bosoens/bartavelle;;660;155
+30;intersection bretelle;;575;200
+31;début tierces;;538;310
+32;fin grevettaz;;550;329
+33;intersection rhodos;;536;371
+34;intersection grevettaz piste noire;;502;415
+35;début veleray;;755;352
+36;fin veleray;;1013;171
 37;;;;
+38;;;;
+39;;;;
+40;;;;
+41;;;;
+42;;;;
+43;;;;
+44;;;;
+45;;;;
+46;;;;
+47;;;;
+48;;;;
+49;;;;

@@ -38,7 +38,7 @@ public class DrawPanel extends JPanel {
         super.paintComponent(g);
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File(System.getProperty("user.dir") + "\\resources\\ski_station_map1080_7xx.PNG"));
+            img = ImageIO.read(new File(System.getProperty("user.dir") + "\\resources\\ski_station_map950_689.PNG"));
         } catch (IOException e) {
         }
         Image background = img;
