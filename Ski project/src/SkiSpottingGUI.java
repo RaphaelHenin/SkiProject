@@ -1,5 +1,8 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Shape;
 
 import javax.swing.JFrame;
 import java.util.ArrayList;
@@ -23,13 +26,11 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
+import java.awt.geom.Ellipse2D;
 import javax.swing.JTextArea;
 import javax.swing.JPanel;
 
-public class SkiSpottingGUI {
+public class SkiSpottingGUI{
 
 	private JFrame frame;
 	private JTextField textName;
@@ -62,7 +63,7 @@ public class SkiSpottingGUI {
 	public SkiSpottingGUI() {
 		initialize();
 	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -93,19 +94,17 @@ public class SkiSpottingGUI {
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, }));
 
-		JPanel panel = new JPanel();
+		/*JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, "4, 2, 1, 51, fill, fill");
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new BorderLayout(0, 0));*/
+		
+		JPanel drawpanel = new DrawPanel();
+		frame.getContentPane().add(drawpanel, "4, 2, 1, 51, fill, fill");
+		drawpanel.setLayout(new BorderLayout(0, 0));
 
-		JLabel lblNewLabel = new JLabel(
-				new ImageIcon(System.getProperty("user.dir") + "\\resources\\ski_station_map.PNG"));
-		lblNewLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				System.out.println("x : "+ arg0.getX()+"\n y: "+arg0.getY());
-			}
-		});
-		panel.add(lblNewLabel);
+		/*JLabel lblNewLabel = new JLabel(
+				new ImageIcon(System.getProperty("user.dir") + "\\resources\\ski_station_map1080_7xx.PNG"));
+		drawpanel.add(lblNewLabel);*/
 
 		JLabel lblName = new JLabel("Name");
 		frame.getContentPane().add(lblName, "2, 2");
