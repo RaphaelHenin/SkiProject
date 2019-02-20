@@ -1,8 +1,6 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Shape;
+import java.awt.Point;
 
 import javax.swing.JFrame;
 import java.util.ArrayList;
@@ -20,15 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
 import javax.swing.JTextArea;
-import javax.swing.JPanel;
 
 public class SkiSpottingGUI{
 
@@ -98,7 +91,7 @@ public class SkiSpottingGUI{
 		frame.getContentPane().add(panel, "4, 2, 1, 51, fill, fill");
 		panel.setLayout(new BorderLayout(0, 0));*/
 		
-		JPanel drawpanel = new DrawPanel();
+		DrawPanel drawpanel = new DrawPanel();
 		frame.getContentPane().add(drawpanel, "4, 2, 1, 51, fill, fill");
 		drawpanel.setLayout(new BorderLayout(0, 0));
 
@@ -145,12 +138,14 @@ public class SkiSpottingGUI{
 		// Store nodes from the CSV "nodes.csv" to an ArrayList (ReadCSVFile
 		// function
 		// return an arraylist in which, each item is a line of the csv).
-		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\vertices.csv");
+		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\vertices_real_skiresort.csv");
 
 		// Declare an ArrayList to store the nodes read in the csv file
 		nodes = new ArrayList<Node>();
 
 		String[] listOfNodes = new String[CSVnodes.size()];
+		
+		ArrayList<Point> points = new ArrayList<Point>();
 
 		// Create Nodes and store them in the ArrayList
 		// The value is the newest Node which his constructor is Node(Id, Name,
@@ -163,14 +158,16 @@ public class SkiSpottingGUI{
 			int id = Integer.valueOf(CSVnodes.get(i)[0]);
 			String name = CSVnodes.get(i)[1];
 			int altitude = Integer.valueOf(CSVnodes.get(i)[2]);
-			nodes.add(new Node(id, name, altitude));
+			int x = Integer.valueOf(CSVnodes.get(i)[3]);
+			int y = Integer.valueOf(CSVnodes.get(i)[4]);
+			Node currentNode = new Node(id, name, altitude, x, y);
+			nodes.add(currentNode);	
 			listOfNodes[i] = name;
-
 		}
 
 		// Store relations between each nodes from the CSV "relation_vertices.csv" to an
 		// ArrayList
-		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\relation_vertices.csv");
+		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\relation_vertices_real_skiresort.csv");
 
 		// Declare an ArrayList to store the edges read in the csv file
 		edges = new ArrayList<Edge>();
@@ -254,10 +251,15 @@ public class SkiSpottingGUI{
 						Double time = 0.0;
 						textResult.setText(textResult.getText()
 								+ "\n List of ski slopes you need to use (name, type or difficulty, approx. time [HH:MM:SS]) : \n");
+						Point firstPoint = new Point(arcCoveredByPath.get(0).getSource().getX(), arcCoveredByPath.get(0).getSource().getY());
+						points.add(firstPoint);
 						// Display the edges (Name, Ski Slope difficulty|Ski
 						// Lift type|BUS, time to travel)
 						for (Edge arc : arcCoveredByPath) {
 							time += arc.getTime();
+							Point point = new Point(arc.getDestination().getX(), arc.getDestination().getY());
+							if(!points.contains(point))
+								points.add(point);
 							if (arc.getTransportType() == "BUS" || arc.getName().length() >= 13)
 								textResult
 										.setText(textResult.getText() + " > " + arc.getName() + " \t"
@@ -273,6 +275,8 @@ public class SkiSpottingGUI{
 														.convertDoubleToTime(arc.getTime(), new ArrayList<String>()))
 												+ "] \n");
 						}
+						drawpanel.setPoints(points);
+						drawpanel.repaint();
 						// Display the total time needed to go to source node to
 						// destination node
 						textResult

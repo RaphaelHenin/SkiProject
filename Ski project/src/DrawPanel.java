@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -13,24 +12,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class DrawPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private ArrayList<Point> points;
 
-    public DrawPanel() {
-    	System.out.println("contructeur");
+
+
+	public DrawPanel() {
+    	repaint();
         points = new ArrayList<Point>();
-        addMouseListener(new MouseAdapter() {
+        /*addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 points.add(new Point(e.getX(), e.getY()));
                 System.out.println("x : "+e.getX()+"\ny : "+ e.getY());
                 repaint();
             }
-        });
+        });*/
     }
 
     @Override
@@ -46,22 +46,19 @@ public class DrawPanel extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(Color.red);
-        for (Point point : points) {
-            g2.fillOval(point.x, point.y, 20, 20);
-        }
+        if(points.size()!=0)
+	        for (Point point : points) {
+	            g2.fillOval(point.x, point.y, 20, 20);
+	        }
+    }
+    
+    public ArrayList<Point> getPoints() {
+    	return points;
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JFrame frame = new JFrame();
-                frame.add(new DrawPanel());
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setSize(400, 400);
-                frame.setVisible(true);
-            }
-        });
+    public void setPoints(ArrayList<Point> points) {
+    	this.points = points;
     }
-
 }
+
+
