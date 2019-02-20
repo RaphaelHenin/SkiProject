@@ -145,7 +145,6 @@ public class SkiSpottingGUI{
 
 		String[] listOfNodes = new String[CSVnodes.size()];
 		
-		ArrayList<Point> points = new ArrayList<Point>();
 
 		// Create Nodes and store them in the ArrayList
 		// The value is the newest Node which his constructor is Node(Id, Name,
@@ -211,6 +210,8 @@ public class SkiSpottingGUI{
 		btnGo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				ArrayList<Point> points = new ArrayList<Point>();
 				// Check if the fields are not empty
 				if (textName.getText().isEmpty())
 					JOptionPane.showMessageDialog(null, "Name Field is empty");

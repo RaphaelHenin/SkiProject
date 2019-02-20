@@ -50,6 +50,7 @@ public class DrawPanel extends JPanel {
 	        for (Point point : points) {
 	            g2.fillOval(point.x, point.y, 20, 20);
 	        }
+        g2.dispose();
     }
     
     public ArrayList<Point> getPoints() {
