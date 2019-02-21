@@ -18,8 +18,8 @@ Id;Name;Altitude;x;y;;;;Ratio Altitude/Pixel
 17;debut foyères (piste verte à coté de signal);1558;203;377;;;;
 18;fin foyères;1482;199;416;;;;
 19;intersection variante/joux;1743;271;283;;;;
-20;fin de roselette 2;2143;360;79;not used;;;
-21;début roselette 2;1784;373;262;not used;;;
+20;fin de roselette 2;1111111111;360;1111111111;not used;;;
+21;début roselette 2;1111111111;373;1111111111;not used;;;
 22;début bretelle (intersection);2059;405;122;;;;
 23;début nantrouge;1835;417;236;;;;
 24;début pierre blanche;1937;484;184;;;;
@@ -29,7 +29,7 @@ Id;Name;Altitude;x;y;;;;Ratio Altitude/Pixel
 28;début col;2100;603;101;;;;
 29;intersection bosoens/bartavelle;2032;577;136;;;;
 30;intersection bretelle;1957;504;174;;;;
-31;début tierces;1770;474;269;not used;;;
+31;début tierces;1111111111;474;1111111111;not used;;;
 32;fin grevettaz;1733;484;288;;;;
 33;intersection rhodos;1660;465;325;;;;
 34;intersection grevettaz piste noire;1582;441;365;;;;
@@ -39,12 +39,12 @@ Id;Name;Altitude;x;y;;;;Ratio Altitude/Pixel
 38;intersection liaison;1833;711;237;;;;
 39;fourche début liaison;1943;768;181;;;;
 40;grevettaz/laision;1812;658;248;;;;
-41;fin tierces;2277;839;11;;;;
+41;fin tierces;2277;839;112;;;;
 42;tierces(rouge)/liaison(noire);1884;596;211;;;;
 43;début bartavelle;2055;658;124;;;;
-44;début monument;2030;683;137;not used;;;
+44;début monument;1111111111;683;1111111111;not used;;;
 45;fin monument;2136;822;83;;;;
-46;début aiguille;2085;856;109;not used;;;
+46;début aiguille;1111111111;856;1111111111;not used;;;
 47;fin aiguille;2244;922;28;;;;
 48;fin nantrouge;2083;790;110;;;;
 49;intersection piste rouge en dessous de nantrouge;2030;769;137;;;;
