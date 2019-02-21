@@ -48,7 +48,14 @@ public class DrawPanel extends JPanel {
         g2.setColor(Color.red);
         if(points.size()!=0)
 	        for (Point point : points) {
+	        	g2.setColor(Color.red);
 	            g2.fillOval(point.x, point.y, 20, 20);
+	            g2.setColor(Color.black);
+	            String indexOfCurrentPoint = Integer.toString(points.indexOf(point));
+	            if(indexOfCurrentPoint.length()>1)
+	            	g2.drawString(indexOfCurrentPoint, point.x+4, point.y+15);
+	            else
+	            	g2.drawString(indexOfCurrentPoint, point.x+7, point.y+15);
 	        }
         g2.dispose();
     }
