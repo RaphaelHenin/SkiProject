@@ -1,4 +1,6 @@
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Point;
 
 import javax.swing.JFrame;
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextArea;
 
-public class SkiSpottingGUI {
+public class SkiSpottingGUI{
 
 	private JFrame frame;
 	private JTextField textName;
@@ -54,18 +56,18 @@ public class SkiSpottingGUI {
 	public SkiSpottingGUI() {
 		initialize();
 	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		// Create the form
 		frame = new JFrame();
-		frame.setBounds(100, 100, 950, 461);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new FormLayout(
 				new ColumnSpec[] { ColumnSpec.decode("25px"), ColumnSpec.decode("350px"), ColumnSpec.decode("25px"),
-						ColumnSpec.decode("500px"), },
+						ColumnSpec.decode("500px:grow"), },
 				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
@@ -75,23 +77,34 @@ public class SkiSpottingGUI {
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("50dlu"),
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
+						RowSpec.decode("default:grow"), FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
+						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, }));
+
+		/*JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, "4, 2, 1, 51, fill, fill");
+		panel.setLayout(new BorderLayout(0, 0));*/
+		
+		DrawPanel drawpanel = new DrawPanel();
+		frame.getContentPane().add(drawpanel, "4, 2, 1, 51, fill, fill");
+		drawpanel.setLayout(new BorderLayout(0, 0));
+
+		/*JLabel lblNewLabel = new JLabel(
+				new ImageIcon(System.getProperty("user.dir") + "\\resources\\ski_station_map1080_7xx.PNG"));
+		drawpanel.add(lblNewLabel);*/
 
 		JLabel lblName = new JLabel("Name");
 		frame.getContentPane().add(lblName, "2, 2");
 
-		JLabel lblResult = new JLabel("Result :");
-		frame.getContentPane().add(lblResult, "4, 2");
-
 		textName = new JTextField();
 		frame.getContentPane().add(textName, "2, 4, left, default");
 		textName.setColumns(10);
-
-		JTextArea textResult = new JTextArea();
-		textResult.setEditable(false);
-		JScrollPane scroll = new JScrollPane(textResult);
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		frame.getContentPane().add(scroll, "4, 4, 1, 21, fill, fill");
 
 		JLabel lblLastname = new JLabel("Lastname");
 		frame.getContentPane().add(lblLastname, "2, 6");
@@ -125,12 +138,13 @@ public class SkiSpottingGUI {
 		// Store nodes from the CSV "nodes.csv" to an ArrayList (ReadCSVFile
 		// function
 		// return an arraylist in which, each item is a line of the csv).
-		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\vertices.csv");
+		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\vertices_real_skiresort.csv");
 
 		// Declare an ArrayList to store the nodes read in the csv file
 		nodes = new ArrayList<Node>();
 
 		String[] listOfNodes = new String[CSVnodes.size()];
+		
 
 		// Create Nodes and store them in the ArrayList
 		// The value is the newest Node which his constructor is Node(Id, Name,
@@ -143,14 +157,16 @@ public class SkiSpottingGUI {
 			int id = Integer.valueOf(CSVnodes.get(i)[0]);
 			String name = CSVnodes.get(i)[1];
 			int altitude = Integer.valueOf(CSVnodes.get(i)[2]);
-			nodes.add(new Node(id, name, altitude));
+			int x = Integer.valueOf(CSVnodes.get(i)[3]);
+			int y = Integer.valueOf(CSVnodes.get(i)[4]);
+			Node currentNode = new Node(id, name, altitude, x, y);
+			nodes.add(currentNode);	
 			listOfNodes[i] = name;
-
 		}
 
 		// Store relations between each nodes from the CSV "relation_vertices.csv" to an
 		// ArrayList
-		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\relation_vertices.csv");
+		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\relation_vertices_real_skiresort.csv");
 
 		// Declare an ArrayList to store the edges read in the csv file
 		edges = new ArrayList<Edge>();
@@ -181,10 +197,21 @@ public class SkiSpottingGUI {
 
 		JButton btnGo = new JButton("Go !");
 		frame.getContentPane().add(btnGo, "2, 24, fill, fill");
+
+		JLabel lblResult = new JLabel("Result :");
+		frame.getContentPane().add(lblResult, "2, 26");
+
+		JTextArea textResult = new JTextArea();
+		textResult.setEditable(false);
+		JScrollPane scroll = new JScrollPane(textResult);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		frame.getContentPane().add(scroll, "2, 28, 1, 25, fill, fill");
 		// When the user click on the button
 		btnGo.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				ArrayList<Point> points = new ArrayList<Point>();
 				// Check if the fields are not empty
 				if (textName.getText().isEmpty())
 					JOptionPane.showMessageDialog(null, "Name Field is empty");
@@ -225,24 +252,45 @@ public class SkiSpottingGUI {
 						Double time = 0.0;
 						textResult.setText(textResult.getText()
 								+ "\n List of ski slopes you need to use (name, type or difficulty, approx. time [HH:MM:SS]) : \n");
+						Point firstPoint = new Point(arcCoveredByPath.get(0).getSource().getX(), arcCoveredByPath.get(0).getSource().getY());
+						points.add(firstPoint);
 						// Display the edges (Name, Ski Slope difficulty|Ski
 						// Lift type|BUS, time to travel)
 						for (Edge arc : arcCoveredByPath) {
 							time += arc.getTime();
-							if(arc.getTransportType() == "BUS" || arc.getName().length() >= 13)
-							textResult.setText(textResult.getText() + " > " + arc.getName() + " \t"
-									+ arc.getTransportType() + "\t [" + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(arc.getTime(), new ArrayList<String>())) + "] \n");
+							Point point = new Point(arc.getDestination().getX(), arc.getDestination().getY());
+							if(!points.contains(point))
+								points.add(point);
+							if (arc.getTransportType() == "BUS" || arc.getName().length() >= 13)
+								textResult
+										.setText(textResult.getText() + " > " + arc.getName() + " \t"
+												+ arc.getTransportType() + "\t ["
+												+ ConvertDoubleToTime.displayTime(ConvertDoubleToTime
+														.convertDoubleToTime(arc.getTime(), new ArrayList<String>()))
+												+ "] \n");
 							else
-								textResult.setText(textResult.getText() + " > " + arc.getName() + "\t\t"
-										+ arc.getTransportType() + "\t [" + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(arc.getTime(), new ArrayList<String>())) + "] \n");
+								textResult
+										.setText(textResult.getText() + " > " + arc.getName() + "\t\t"
+												+ arc.getTransportType() + "\t ["
+												+ ConvertDoubleToTime.displayTime(ConvertDoubleToTime
+														.convertDoubleToTime(arc.getTime(), new ArrayList<String>()))
+												+ "] \n");
 						}
+						drawpanel.setPoints(points);
+						drawpanel.repaint();
 						// Display the total time needed to go to source node to
 						// destination node
-						textResult.setText(textResult.getText() + "\n Total time = " + ConvertDoubleToTime.displayTime(ConvertDoubleToTime.convertDoubleToTime(time, new ArrayList<String>())) + "\n");
+						textResult
+								.setText(textResult.getText() + "\n Total time = "
+										+ ConvertDoubleToTime.displayTime(
+												ConvertDoubleToTime.convertDoubleToTime(time, new ArrayList<String>()))
+										+ "\n");
 					}
 				}
 			}
 		});
+		
+		
 
 	}
 }
