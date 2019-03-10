@@ -63,11 +63,11 @@ public class SkiSpottingGUI{
 	private void initialize() {
 		// Create the form
 		frame = new JFrame();
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setBounds(100, 100, 950, 461);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new FormLayout(
 				new ColumnSpec[] { ColumnSpec.decode("25px"), ColumnSpec.decode("350px"), ColumnSpec.decode("25px"),
-						ColumnSpec.decode("500px:grow"), },
+						ColumnSpec.decode("500px"), },
 				new RowSpec[] { FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
@@ -77,34 +77,24 @@ public class SkiSpottingGUI{
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
 						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("50dlu"),
 						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						RowSpec.decode("default:grow"), FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC,
-						FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC,
-						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, }));
+						FormSpecs.DEFAULT_ROWSPEC, FormSpecs.RELATED_GAP_ROWSPEC, FormSpecs.DEFAULT_ROWSPEC, }));
 
 		/*JPanel panel = new JPanel();
 		frame.getContentPane().add(panel, "4, 2, 1, 51, fill, fill");
 		panel.setLayout(new BorderLayout(0, 0));*/
 		
-		DrawPanel drawpanel = new DrawPanel();
+		/*DrawPanel drawpanel = new DrawPanel();
 		frame.getContentPane().add(drawpanel, "4, 2, 1, 51, fill, fill");
-		drawpanel.setLayout(new BorderLayout(0, 0));
-
-		/*JLabel lblNewLabel = new JLabel(
-				new ImageIcon(System.getProperty("user.dir") + "\\resources\\ski_station_map1080_7xx.PNG"));
-		drawpanel.add(lblNewLabel);*/
+		drawpanel.setLayout(new BorderLayout(0, 0));*/
 
 		JLabel lblName = new JLabel("Name");
 		frame.getContentPane().add(lblName, "2, 2");
+		
 
 		textName = new JTextField();
 		frame.getContentPane().add(textName, "2, 4, left, default");
 		textName.setColumns(10);
+		
 
 		JLabel lblLastname = new JLabel("Lastname");
 		frame.getContentPane().add(lblLastname, "2, 6");
@@ -135,10 +125,10 @@ public class SkiSpottingGUI{
 		// Store the workspace path
 		String workspacePath = System.getProperty("user.dir");
 
-		// Store nodes from the CSV "nodes.csv" to an ArrayList (ReadCSVFile
+		// Store nodes from the CSV "vertices.csv" to an ArrayList (ReadCSVFile
 		// function
 		// return an arraylist in which, each item is a line of the csv).
-		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\vertices_real_skiresort.csv");
+		ArrayList<String[]> CSVnodes = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\vertices.csv");
 
 		// Declare an ArrayList to store the nodes read in the csv file
 		nodes = new ArrayList<Node>();
@@ -157,16 +147,16 @@ public class SkiSpottingGUI{
 			int id = Integer.valueOf(CSVnodes.get(i)[0]);
 			String name = CSVnodes.get(i)[1];
 			int altitude = Integer.valueOf(CSVnodes.get(i)[2]);
-			int x = Integer.valueOf(CSVnodes.get(i)[3]);
-			int y = Integer.valueOf(CSVnodes.get(i)[4]);
-			Node currentNode = new Node(id, name, altitude, x, y);
+			//int x = Integer.valueOf(CSVnodes.get(i)[3]);
+			//int y = Integer.valueOf(CSVnodes.get(i)[4]);
+			Node currentNode = new Node(id, name, altitude);//, x, y);
 			nodes.add(currentNode);	
 			listOfNodes[i] = name;
 		}
 
 		// Store relations between each nodes from the CSV "relation_vertices.csv" to an
 		// ArrayList
-		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\relation_vertices_real_skiresort.csv");
+		ArrayList<String[]> csv_edge = ReadCSV.ReadCSVFile(workspacePath + "\\resources\\relation_vertices.csv");
 
 		// Declare an ArrayList to store the edges read in the csv file
 		edges = new ArrayList<Edge>();
@@ -199,13 +189,14 @@ public class SkiSpottingGUI{
 		frame.getContentPane().add(btnGo, "2, 24, fill, fill");
 
 		JLabel lblResult = new JLabel("Result :");
-		frame.getContentPane().add(lblResult, "2, 26");
+		frame.getContentPane().add(lblResult, "4, 2");
 
 		JTextArea textResult = new JTextArea();
 		textResult.setEditable(false);
 		JScrollPane scroll = new JScrollPane(textResult);
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		frame.getContentPane().add(scroll, "2, 28, 1, 25, fill, fill");
+		frame.getContentPane().add(scroll, "4, 4, 1, 21, fill, fill");
+		
 		// When the user click on the button
 		btnGo.addMouseListener(new MouseAdapter() {
 			@Override
@@ -276,8 +267,8 @@ public class SkiSpottingGUI{
 														.convertDoubleToTime(arc.getTime(), new ArrayList<String>()))
 												+ "] \n");
 						}
-						drawpanel.setPoints(points);
-						drawpanel.repaint();
+						//drawpanel.setPoints(points);
+						//drawpanel.repaint();
 						// Display the total time needed to go to source node to
 						// destination node
 						textResult
